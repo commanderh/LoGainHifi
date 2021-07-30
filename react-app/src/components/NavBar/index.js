@@ -2,11 +2,10 @@ import { useState } from "react";
 import styles from "../../css-modules/NavBar.module.css";
 import SignupFormModal from "../SignupFormModal";
 import LoginFormModal from "../LoginFormModal";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 
 const NavBar = () => {
-  const dispatch = useDispatch();
   const [toggleModal, setToggleModal] = useState("");
   const user = useSelector(state => state.session.user)
 
