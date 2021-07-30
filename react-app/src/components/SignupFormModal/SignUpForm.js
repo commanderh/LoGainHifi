@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
-const SignUpForm = () => {
+const SignUpForm = ({handleOnClickToggle}) => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
@@ -19,6 +20,8 @@ const SignUpForm = () => {
       if (data) {
         setErrors(data)
       }
+    } else {
+      setErrors(["Passwords do not match"]);
     }
   };
 
@@ -87,6 +90,11 @@ const SignUpForm = () => {
         ></input>
       </div>
       <button type='submit'>Sign Up</button>
+      <hr/>
+      <div>
+        Already have an account?
+        <span onClick={handleOnClickToggle}> Login</span>
+      </div>
     </form>
   );
 };
