@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 import HomePage from './components/HomePage';
+import TopicPage from './components/TopicPage'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,6 +28,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           <HomePage />
+        </Route>
+        <Route exact path="/topic/:topicId">
+          <TopicPage />
         </Route>
         {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>

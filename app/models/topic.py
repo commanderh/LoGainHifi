@@ -25,5 +25,5 @@ class Topic (db.Model):
             'user': self.user.to_dict(),
             'title': self.title,
             'body': self.body,
-            'topic_images': {topic_image.id: topic_image.to_dict() for topic_image in topic_images}
+            'topic_images': {topic_image.id: topic_image.to_dict() for topic_image in self.topic_images}
         }
