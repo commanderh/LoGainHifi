@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getCategories } from "../../store/categories";
+import { loadCategories } from "../../store/categories";
 import EditTopicModal from "../EditTopicModal";
 
 const TopicPage = () => {
@@ -22,7 +22,7 @@ const TopicPage = () => {
 
   useEffect(() => {
     if(!loaded) {
-      dispatch(getCategories())
+      dispatch(loadCategories())
     }
   }, [loaded, dispatch])
   return ( topic || null ) && (
@@ -30,7 +30,7 @@ const TopicPage = () => {
       <div>{topic.title}</div>
       <div>{topic.body}</div>
       <button onClick={handleOnClick}><i class="fas fa-edit"></i></button>
-      {showModal && <EditTopicModal handleOffClick={handleOffClick}/>}
+      {showModal && <EditTopicModal handleOffClick={handleOffClick} topic={topic}/>}
     </>
   )
 }

@@ -2,7 +2,7 @@ import Categories from "./Categories";
 import RecentTopics from "./RecentTopics";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getCategories } from '../../store/categories';
+import { loadCategories } from '../../store/categories';
 
 
 const HomePage = () => {
@@ -10,7 +10,7 @@ const HomePage = () => {
   const categories = useSelector(state => Object.values(state.categories.all))
   // console.log(categories);
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(loadCategories());
   }, [dispatch])
 
   return (

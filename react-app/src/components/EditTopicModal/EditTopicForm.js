@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { createTopic } from "../../store/categories"
+import { editTopic } from "../../store/categories"
 
 const EditTopicForm = ({topic}) => {
   const [title, setTitle] = useState("");
@@ -8,7 +8,7 @@ const EditTopicForm = ({topic}) => {
   const [categoryId, setCategoryId] = useState("");
   const dispatch = useDispatch();
   const user_id = useSelector(state => state.session.user.id)
-
+  console.log(">>>>>>><<<<<<<<", topic)
   const updateTitle = (e) => {
     setTitle(e.target.value);
   }
@@ -24,10 +24,11 @@ const EditTopicForm = ({topic}) => {
       title,
       body,
       user_id,
-      category_id: categoryId
+      category_id: categoryId,
+      topic_id: topic.id
     }
 
-    dispatch(createTopic(topicFormValues));
+    dispatch(editTopic(topicFormValues));
   };
 
   return (
