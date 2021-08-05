@@ -22,6 +22,7 @@ class Topic (db.Model):
     
     def to_dict(self):
         return {
+            'id': self.id,
             'user': self.user.to_dict(),
             'title': self.title,
             'body': self.body,

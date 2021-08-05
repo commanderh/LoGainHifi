@@ -15,7 +15,7 @@ const RecentTopics = ({categories}) => {
       {categories.map(category => {
         return Object.keys(category.topics).map((topic, index) => {
           console.log("CATEGORY", category)
-          console.log(topic, 'THIS IS TOPIC')
+          // console.log(topic, 'THIS IS TOPIC')
           const {title, name} = category.topics[topic]
           return <Topic title={title} categoryName={name} key={topic} topicId={topic}/>
         })

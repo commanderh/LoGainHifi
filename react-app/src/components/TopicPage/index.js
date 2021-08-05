@@ -1,6 +1,9 @@
 const TopicPage = () => {
   return (
-    <div>Hello World</div>
+    <>
+      <div>Hello World</div>
+      <i class="fas fa-edit"></i>
+    </>
   )
 }
 

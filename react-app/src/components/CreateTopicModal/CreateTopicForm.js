@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
+import { createTopic } from "../../store/categories"
+
 const CreateTopicForm = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [categoryId, setCategoryId] = useState("");
   const dispatch = useDispatch();
   const user_id = useSelector(state => state.session.user.id)
 
@@ -20,8 +23,11 @@ const CreateTopicForm = () => {
     const topicFormValues = {
       title,
       body,
-      user_id
+      user_id,
+      category_id: categoryId
     }
+
+    dispatch(createTopic(topicFormValues));
   };
 
   return (
@@ -46,8 +52,8 @@ const CreateTopicForm = () => {
           />
         </div>
         <div>
-          <label for="category-select">Select a Category</label>
-          <select id="category-select">
+          <label htmlFor="category-select">Select a Category</label>
+          <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)} id="category-select">
             <option value="1">Music Talk</option>
             <option value="2">Headphones</option>
             <option value="3">Equipment & Electronics</option>
