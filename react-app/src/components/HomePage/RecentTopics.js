@@ -17,7 +17,7 @@ const RecentTopics = ({categories}) => {
           console.log("CATEGORY", category)
           // console.log(topic, 'THIS IS TOPIC')
           const {title, name} = category.topics[topic]
-          return <Topic title={title} categoryName={name} key={topic} topicId={topic}/>
+          return <Topic title={title} categoryName={name} key={topic} topicId={topic} categoryId={category.id}/>
         })
       })
       }

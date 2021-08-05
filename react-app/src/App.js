@@ -29,7 +29,7 @@ function App() {
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Route exact path="/topic/:topicId">
+        <Route exact path="/categories/:categoryId/topics/:topicId">
           <TopicPage />
         </Route>
         {/* <ProtectedRoute path='/users' exact={true} >

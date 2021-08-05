@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { createTopic } from "../../store/categories"
 
-const CreateTopicForm = () => {
+const EditTopicForm = ({topic}) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -33,7 +33,7 @@ const CreateTopicForm = () => {
   return (
     <div>
       <div>
-        Create a topic
+        Edit your topic
       </div>
       <form onSubmit={handleSubmit}>
         <div>
@@ -67,11 +67,11 @@ const CreateTopicForm = () => {
           </select>
         </div>
         <div>
-          <button>New Topic</button>
+          <button>Update Topic</button>
         </div>
       </form>
     </div>
   )
 };
 
-export default CreateTopicForm;
+export default EditTopicForm;
