@@ -1,6 +1,7 @@
+from app.forms.create_topic import CreateTopic
 from flask import Blueprint, jsonify, session, request
 from app.models import Topic, db
-from app.forms import CreateTopic
+from app.forms import EditTopic, CreateTopic
 from flask_login import login_required, current_user
 
 topics_routes = Blueprint('topics', __name__)
@@ -26,5 +27,13 @@ def create_topic():
 @login_required
 def edit_topic(topic_id):
     topic = Topic.query.get(topic_id)
-    topic.title 
-    topic.body
+    form = EditTopic()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        topic.title = form.title.data
+        topic.body = form.body.data
+
+        db.session.commit()
+        return topic.to_dict()
+    return jsonify({'errors': form.errors})

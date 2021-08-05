@@ -29,7 +29,7 @@ export const createTopic = (topicFormValues) => async (dispatch) => {
   })
   if(response.ok) {
     const data = await response.json();
-    console.log(">>>>>>>>><<<<<<<<", data)
+    // console.log(">>>>>>>>><<<<<<<<", data)
     dispatch(createATopic(data, topicFormValues.category_id))
   }
 }
