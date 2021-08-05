@@ -20,7 +20,7 @@ const LoginForm = ({handleOnClickToggle, handleOffClick}) => {
 
   const demoLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login("demo@aa.io", "password"));
+    const data = dispatch(login("demo@aa.io", "password"));
     if (data) {
       setErrors(data);
     }
@@ -74,7 +74,7 @@ const LoginForm = ({handleOnClickToggle, handleOffClick}) => {
       }}>Login as Demo User</button>
       <div>
         New to LoGainHifi?
-        <span onClick={handleOnClickToggle}> Sign Up</span>
+        <span id="signup2" onClick={handleOnClickToggle}> Sign Up</span>
       </div>
     </div>
   );

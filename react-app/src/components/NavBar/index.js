@@ -4,36 +4,45 @@ import SignupFormModal from "../SignupFormModal";
 import LoginFormModal from "../LoginFormModal";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
+import CreateTopicModal from "../CreateTopicModal"
 
 const NavBar = () => {
   const [toggleModal, setToggleModal] = useState("");
   const user = useSelector(state => state.session.user)
 
-  const handleOnClickToggle = () => {
-    if(!toggleModal) {
-      setToggleModal("signup");
-      return
-    }
-    const modalToShow = toggleModal === "signup" ? "login" : "signup"
-    setToggleModal(modalToShow);
+  const handleOnClickToggle = (e) => {
+    // if(!toggleModal) {
+    //   setToggleModal("signup");
+    //   return
+    // }
+    // const modalToShow = toggleModal === "signup" ? "login" : "signup"
+    console.log(e.target.id)
+    setToggleModal(e.target.id);
   }
   
   const handleOffClick = () => {
     setToggleModal("");
   }
 
+
+
+
   let isUserLoggedIn;
   if(!user) {
     isUserLoggedIn = (
       <>
-        <button onClick={handleOnClickToggle}>Login | Signup</button>
-        {toggleModal === "signup" && <SignupFormModal handleOnClickToggle={handleOnClickToggle} handleOffClick={handleOffClick}/>}
+        <button id="signup" onClick={handleOnClickToggle}>Login | Signup</button>
+        {(toggleModal === "signup" || toggleModal === "signup2")&& <SignupFormModal handleOnClickToggle={handleOnClickToggle} handleOffClick={handleOffClick}/>}
         {toggleModal === "login" && <LoginFormModal handleOnClickToggle={handleOnClickToggle} handleOffClick={handleOffClick}/>}
       </>
     )
   } else {
     isUserLoggedIn = (
-      <ProfileButton user={user}/>
+      <>
+        <ProfileButton user={user}/>
+        <button id="newTopic" onClick={handleOnClickToggle}>New Topic</button>
+        {toggleModal === "newTopic" && <CreateTopicModal handleOffClick={handleOffClick}/>}
+      </>
     )
   }
 

@@ -93,7 +93,7 @@ const SignUpForm = ({handleOnClickToggle}) => {
       <hr/>
       <div>
         Already have an account?
-        <span onClick={handleOnClickToggle}> Login</span>
+        <span id="login" onClick={handleOnClickToggle}> Login</span>
       </div>
     </form>
   );
