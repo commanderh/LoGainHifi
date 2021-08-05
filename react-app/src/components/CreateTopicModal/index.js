@@ -4,7 +4,7 @@ const CreateTopicModal = ({handleOffClick}) => {
   return (
     <>
       <Modal onClose={handleOffClick}>
-        <CreateTopicForm />
+        <CreateTopicForm handleOffClick={handleOffClick}/>
       </Modal>
     </>
   )

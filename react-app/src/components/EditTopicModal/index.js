@@ -4,7 +4,7 @@ const EditTopicModal = ({handleOffClick, topic}) => {
   return (
     <>
       <Modal onClose={handleOffClick} >
-        <EditTopicForm topic={topic}/>
+        <EditTopicForm topic={topic} handleOffClick={handleOffClick}/>
       </Modal>
     </>
   )

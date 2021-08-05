@@ -16,7 +16,7 @@ def create_topic():
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         data = request.get_json();
-        topic = Topic(title=data['title'], body=data['body'], category_id=data['category_id'], user_id=data['user_id'])
+        topic = Topic(title=data['title'], body=data['body'], category_id=data['category_id'], user_id=current_user.id)
         db.session.add(topic)
         db.session.commit()
         # return {'topic': topic.to_dict()}
@@ -27,6 +27,8 @@ def create_topic():
 @login_required
 def edit_topic(topic_id):
     topic = Topic.query.get(topic_id)
+    if topic.user_id != current_user.id:
+        return topic.to_dict()
     form = EditTopic()
     form['csrf_token'].data = request.cookies['csrf_token']
 

@@ -8,9 +8,10 @@ const load = (categories) => ({
   categories
 });
 
-const create = (data, category_id) => ({
+const create = (topic, category_id) => ({
   type: CREATE_TOPIC,
-  payload: {data: data, category_id:category_id}
+  topic,
+  category_id 
 })
 
 const edit = (topic, category_id) => ({
@@ -28,7 +29,7 @@ export const loadCategories = () => async (dispatch) => {
   }
 }
 
-export const createTopic = (topicFormValues) => async (dispatch) => {
+export const createTopic = (topicFormValues, handleOffClick) => async (dispatch) => {
   const response = await fetch(`/api/topics/`, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
@@ -38,10 +39,12 @@ export const createTopic = (topicFormValues) => async (dispatch) => {
     const data = await response.json();
     // console.log(">>>>>>>>><<<<<<<<", data)
     dispatch(create(data, topicFormValues.category_id))
+    handleOffClick();
   }
 }
 
-export const editTopic = (topicFormValues) => async (dispatch) => {
+export const editTopic = (topicFormValues, handleOffClick) => async (dispatch) => {
+  console.log(">>>>>>><<<<<<",topicFormValues);
   const response = await fetch(`/api/topics/${topicFormValues.topic_id}`, {
     method: "PUT",
     headers: {"Content-Type": "application/json"},
@@ -51,6 +54,7 @@ export const editTopic = (topicFormValues) => async (dispatch) => {
     const data = await response.json();
     // console.log(">>>>>>>>><<<<<<<<", data)
     dispatch(edit(data, topicFormValues.category_id))
+    handleOffClick();
   }
 }
 
@@ -66,19 +70,40 @@ const categoriesReducer = (state = initialState, action) => {
     case LOAD_CATEGORIES:
       return {...state, all: action.categories, loaded:true}
     case CREATE_TOPIC:
-      const currentCategory = state.all[action.payload.category_id]
-      const topics = currentCategory.topics
-      topics[action.payload.data.id] = action.payload.data
-      const newState = {...state}
-      newState.all[action.payload.category_id].topics = topics
-      return newState;
+      // const currentCategory = state.all[action.payload.category_id]
+      // const topics = currentCategory.topics
+      // topics[action.payload.data.id] = action.payload.data
+      // const newState = {...state}
+      // newState.all[action.payload.category_id].topics = topics
+      // return newState;
+      return {
+        ...state,
+        all: {
+          ...state.all,
+          [action.category_id] : {
+            ...state.all[action.category_id],
+            topics: {
+              ...state.all[action.category_id].topics,
+              [action.topic.id] : action.topic
+            }
+          }
+        },
+
+      }
     case EDIT_TOPIC:
-      const currentCategoryEdit = state.all[action.category_id]
-      const topicsEdit = currentCategoryEdit.topics
-      topicsEdit[action.data.id] = action.data
-      const newStateEdit = {...state}
-      newStateEdit.all[action.category_id].topics = topics
-      return newStateEdit;
+      return {
+        ...state,
+        all: {
+          ...state.all,
+          [action.category_id] : {
+            ...state.all[action.category_id],
+            topics: {
+              ...state.all[action.category_id].topics,
+              [action.topic.id] : action.topic
+            }
+          }
+        },
+      };
     default:
       return state;
   }

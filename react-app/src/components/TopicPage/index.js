@@ -10,6 +10,7 @@ const TopicPage = () => {
   const topic = useSelector(state => state.categories.all[categoryId]?.topics[topicId]) 
   const loaded = useSelector(state => state.categories.loaded)
   const [showModal, setShowModal] = useState(false);
+  const user = useSelector(state => state.session.user)
 
   // console.log("TOPIC",topic)
   const handleOnClick = () => {
@@ -29,7 +30,7 @@ const TopicPage = () => {
     <>
       <div>{topic.title}</div>
       <div>{topic.body}</div>
-      <button onClick={handleOnClick}><i class="fas fa-edit"></i></button>
+      {user && user.id === topic.user.id && <button onClick={handleOnClick}><i class="fas fa-edit"></i></button>}
       {showModal && <EditTopicModal handleOffClick={handleOffClick} topic={topic}/>}
     </>
   )

@@ -40,8 +40,6 @@ const NavBar = () => {
     isUserLoggedIn = (
       <>
         <ProfileButton user={user}/>
-        <button id="newTopic" onClick={handleOnClickToggle}>New Topic</button>
-        {toggleModal === "newTopic" && <CreateTopicModal handleOffClick={handleOffClick}/>}
       </>
     )
   }

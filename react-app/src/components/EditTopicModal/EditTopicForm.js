@@ -2,13 +2,12 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { editTopic } from "../../store/categories"
 
-const EditTopicForm = ({topic}) => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [categoryId, setCategoryId] = useState("");
+const EditTopicForm = ({topic, handleOffClick}) => {
+  const [title, setTitle] = useState(topic.title);
+  const [body, setBody] = useState(topic.body);
+  const [categoryId, setCategoryId] = useState(topic.category_id);
   const dispatch = useDispatch();
-  const user_id = useSelector(state => state.session.user.id)
-  console.log(">>>>>>><<<<<<<<", topic)
+
   const updateTitle = (e) => {
     setTitle(e.target.value);
   }
@@ -23,12 +22,11 @@ const EditTopicForm = ({topic}) => {
     const topicFormValues = {
       title,
       body,
-      user_id,
       category_id: categoryId,
       topic_id: topic.id
     }
 
-    dispatch(editTopic(topicFormValues));
+    dispatch(editTopic(topicFormValues, handleOffClick));
   };
 
   return (
