@@ -5,6 +5,7 @@ import { loadCategories } from "../../store/categories";
 import EditTopicModal from "../EditTopicModal";
 import DeleteTopicModal from "../DeleteTopicModal";
 import Comments from "./Comments";
+import ListOfComments from "../ListOfComments";
 
 const TopicPage = () => {
   const dispatch = useDispatch()
@@ -45,6 +46,7 @@ const TopicPage = () => {
       {user && user.id === topic.user.id && <button onClick={handleDeleteOnClick}><i class="fas fa-trash"></i></button>}
       {showEditModal && <EditTopicModal handleOffClick={handleEditOffClick} topic={topic}/>}
       {showDeleteModal && <DeleteTopicModal handleOffClick={handleDeleteOffClick} topic={topic}/>}
+      <ListOfComments />
     </>
   )
 }

@@ -123,6 +123,8 @@ const categoriesReducer = (state = initialState, action) => {
       };
     case DELETE_TOPIC:
       delete state.all[action.category_id].topics[action.topic_id]
+      console.log("STATEEEEEEEEEEEEEEEEEEEEEEE", state);
+      console.log("ACTIONNNNNNNNNNNNNNNNNNNNNNN", action);
       return {
         ...state,
         all: {

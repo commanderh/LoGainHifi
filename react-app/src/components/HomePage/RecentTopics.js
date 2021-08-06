@@ -1,5 +1,10 @@
 import Topic from "./Topic";
-const RecentTopics = ({categories}) => {
+import { useSelector } from 'react-redux';
+const RecentTopics = () => {
+  const categories = useSelector(state => Object.values(state.categories.all)) 
+  if(!categories) {
+    return null;
+  }
   return (
     <div>
       {/* {categories.map(category => {

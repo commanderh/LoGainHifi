@@ -47,5 +47,4 @@ def delete_topic(topic_id):
     topic = Topic.query.get(topic_id)
     db.session.delete(topic) 
     db.session.commit()
-    redirect('/')
     return topic.to_dict()

@@ -14,7 +14,7 @@ class User_Comment(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 
     user = relationship("User", back_populates="user_comment")
-    topic = relationship("Topic", back_populates="comments")
+    topic = relationship("Topic", cascade="all,delete", back_populates="comments")
 
 
     def to_dict(self):
@@ -22,8 +22,7 @@ class User_Comment(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'user' : self.user.to_dict(),
-            'cat_id': self.cat_id,
-            'comment': self.comment,
+            'content': self.content,
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }

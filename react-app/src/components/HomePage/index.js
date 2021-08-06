@@ -8,7 +8,7 @@ import CreateTopicModal from '../CreateTopicModal';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const categories = useSelector(state => Object.values(state.categories.all))
+  // const categories = useSelector(state => Object.values(state.categories.all))
   const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     dispatch(loadCategories());
@@ -26,8 +26,8 @@ const HomePage = () => {
     <>
       <button id="newTopic" onClick={handleOnClick}>New Topic</button>
       {showModal && <CreateTopicModal handleOffClick={handleOffClick}/>}
-      <Categories categories={categories}/>
-      <RecentTopics categories={categories}/>
+      <Categories />
+      <RecentTopics />
     </>
   )
 }

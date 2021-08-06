@@ -7,8 +7,8 @@ const DeleteTopicModal = ({handleOffClick, topic}) => {
   const history = useHistory();
   const topicId = topic.id;
   const categoryId = topic.category_id;
-  const handleDelete = () => {
-    dispatch(deleteTopic(topicId, categoryId, handleOffClick))
+  const handleDelete = async () => {
+    await dispatch(deleteTopic(topicId, categoryId, handleOffClick))
     history.push('/')
   };
   return (

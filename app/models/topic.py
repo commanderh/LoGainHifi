@@ -15,7 +15,7 @@ class Topic (db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 
     user = relationship("User", back_populates="topics")
-    comments = relationship("User_Comment", back_populates="topic")
+    comments = relationship("User_Comment", cascade="all,delete", back_populates="topic")
     category = relationship("Category", back_populates="topics")
     topic_images = relationship("Topic_Image", back_populates="topic")
 

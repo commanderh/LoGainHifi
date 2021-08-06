@@ -5,6 +5,13 @@ from app.models import Topic, db
 from flask_login import login_required, current_user
 
 comments_routes = Blueprint('comments', __name__)
+@comments_routes.route('/<int:topic_id>')
+def get_comments(topic_id):
+    comments = User_Comment.query.filter(Topic.id == topic_id).all()
+    # print(f'THESE ARE YOUR CATEGORIES: {categories}')
+    # return {'categories': [category.to_dict() for category in categories]}
+    return {comment.id: comment.to_dict() for comment in comments}
+    # return jsonify([category.to_dict() for category in categories])
 
 @comments_routes.route('/', methods=['POST'])
 @login_required
