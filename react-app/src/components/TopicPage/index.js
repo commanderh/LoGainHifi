@@ -38,14 +38,19 @@ const TopicPage = () => {
     setCommentInput(e.target.value);
   };
 
-  const handleCommentSubmit = () => {
+  const handleCommentSubmit = async () => {
     const commentData = {
       topic_id: topicId,
       user_id: user.id,
       content: commentInput
     }
 
-    dispatch(addComment(commentData))
+    await dispatch(addComment(commentData))
+    setCommentInput("");
+  };
+
+  const cancelNewComment = () => {
+    setCommentInput("");
   };
 
   useEffect(() => {
@@ -60,7 +65,7 @@ const TopicPage = () => {
       <div>
         <input placeholder="Add a public comment" onChange={handleCommentChange} value={commentInput}/>
         <button onClick={handleCommentSubmit}>Comment</button>
-        <button>Cancel</button>
+        <button onClick={cancelNewComment}>Cancel</button>
       </div>
       {user && user.id === topic.user.id && <button onClick={handleEditOnClick}><i class="fas fa-edit"></i></button>}
       {user && user.id === topic.user.id && <button onClick={handleDeleteOnClick}><i class="fas fa-trash"></i></button>}
