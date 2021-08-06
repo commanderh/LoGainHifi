@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { loadCategories } from "../../store/categories";
 import EditTopicModal from "../EditTopicModal";
+import DeleteTopicModal from "../DeleteTopicModal";
 
 const TopicPage = () => {
   const dispatch = useDispatch()
@@ -31,7 +32,9 @@ const TopicPage = () => {
       <div>{topic.title}</div>
       <div>{topic.body}</div>
       {user && user.id === topic.user.id && <button onClick={handleOnClick}><i class="fas fa-edit"></i></button>}
+      {user && user.id === topic.user.id && <button onClick={handleOnClick}><i class="fas fa-trash"></i></button>}
       {showModal && <EditTopicModal handleOffClick={handleOffClick} topic={topic}/>}
+      <DeleteTopicModal topic={topic}/>
     </>
   )
 }

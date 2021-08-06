@@ -39,3 +39,13 @@ def edit_topic(topic_id):
         db.session.commit()
         return topic.to_dict()
     return jsonify({'errors': form.errors})
+
+
+@topics_routes.route('/<int:topic_id>', methods=["DELETE"])
+@login_required
+def delete_topic(topic_id):
+    topic = Topic.query.get(topic_id)
+    db.session.delete(topic) 
+    db.session.commit()
+    print("DELETEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+    return topic.to_dict()

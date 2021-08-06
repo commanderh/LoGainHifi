@@ -2,6 +2,7 @@
 const LOAD_CATEGORIES = 'categories/LOAD_CATEGORIES';
 const CREATE_TOPIC = "/topics/CREATE_TOPIC"
 const EDIT_TOPIC = "/topics/EDIT_TOPIC"
+const DELETE_TOPIC = "/topics/DELETE_TOPIC"
 
 const load = (categories) => ({
   type: LOAD_CATEGORIES,
@@ -16,6 +17,12 @@ const create = (topic, category_id) => ({
 
 const edit = (topic, category_id) => ({
   type: EDIT_TOPIC,
+  topic,
+  category_id
+})
+
+const remove = (topic, category_id) => ({
+  type: DELETE_TOPIC,
   topic,
   category_id
 })
@@ -44,7 +51,6 @@ export const createTopic = (topicFormValues, handleOffClick) => async (dispatch)
 }
 
 export const editTopic = (topicFormValues, handleOffClick) => async (dispatch) => {
-  console.log(">>>>>>><<<<<<",topicFormValues);
   const response = await fetch(`/api/topics/${topicFormValues.topic_id}`, {
     method: "PUT",
     headers: {"Content-Type": "application/json"},
@@ -55,6 +61,16 @@ export const editTopic = (topicFormValues, handleOffClick) => async (dispatch) =
     // console.log(">>>>>>>>><<<<<<<<", data)
     dispatch(edit(data, topicFormValues.category_id))
     handleOffClick();
+  }
+}
+
+export const deleteTopic = (topicId) => async (dispatch) => {
+  const response = await fetch(`/api/topics/${topicId}`, {
+    method: "DELETE",
+    headers: {"Content-Type": "application/json"},
+  });
+  if(response.ok) {
+    
   }
 }
 
@@ -104,6 +120,10 @@ const categoriesReducer = (state = initialState, action) => {
           }
         },
       };
+    case DELETE_TOPIC:
+      return {
+
+      }
     default:
       return state;
   }
