@@ -1,41 +1,56 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import EditTopicModal from "../EditTopicModal";
-import DeleteTopicModal from "../DeleteTopicModal";
+import DeleteCommentModal from "../DeleteCommentModal";
+import { editComment } from "../../store/comments";
 
 
 
 const Comment = ({ comment }) => {
   const user = useSelector(state => state.session.user)
-  const [showEditModal, setShowEditModal] = useState(false);
+  const dispatch = useDispatch();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditComment, setShowEditComment] = useState(false);
+  const [newComment, setNewComment] = useState(comment.content);
 
-  const handleEditOnClick = () => {
-    setShowEditModal(true);
-  };
+
 
   const handleDeleteOnClick = () => {
     setShowDeleteModal(true);
-  };
-
-  const handleEditOffClick = () => {
-    setShowEditModal(false);
   };
 
   const handleDeleteOffClick = () => {
     setShowDeleteModal(false);
   };
 
+  const handleEditComment = (e) => {
+    setNewComment(e.target.value)
+  };
+
+  const openEditComment = () => {
+    setShowEditComment(true);
+  };
+
+  const closeEditComment = () => {
+    setShowEditComment(false);
+  }
+
+  const submitEditComment = async () => {
+    comment.content = newComment;
+    await dispatch(editComment(comment))
+    setShowEditComment(false)
+  }
+
   if (!user) {
     return null;
   }
   return (
     <div>
-      <div>{comment.content}</div>
-      {user && user.id === comment.user.id && <button onClick={handleEditOnClick}><i class="fas fa-edit"></i></button>}
-      {user && user.id === comment.user.id && <button onClick={handleDeleteOnClick}><i class="fas fa-trash"></i></button>}
-      {showEditModal && <EditTopicModal handleOffClick={handleEditOffClick} comment={comment} />}
-      {showDeleteModal && <DeleteTopicModal handleOffClick={handleDeleteOffClick} comment={comment} />}
+      {!showEditComment ? <div>{comment.content}</div> : <textarea value={newComment} onChange={handleEditComment}></textarea>}
+      {showEditComment ? <button onClick={submitEditComment}>Submit</button> : null}
+      {showEditComment ? <button onClick={closeEditComment}><i className="far fa-times-circle"></i></button> : null}
+      {user && user.id === comment.user.id && <button onClick={openEditComment}><i className="fas fa-edit"></i></button>}
+      {user && user.id === comment.user.id && <button onClick={handleDeleteOnClick}><i className="fas fa-trash"></i></button>}
+      {showDeleteModal && <DeleteCommentModal handleOffClick={handleDeleteOffClick} comment={comment} />}
     </div>
   )
 };
