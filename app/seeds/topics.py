@@ -1,6 +1,7 @@
 from app.models import db, Topic
 from lorem_text import lorem
 
+
 def seed_topics():
     topic1 = Topic(title="Tidal or Apple Music Lossless", body=lorem.paragraph(), user_id=1, category_id=1)
     topic2 = Topic(title="Focal Clears", body=lorem.paragraph(), user_id=1, category_id=2)

@@ -1,5 +1,5 @@
 from app.forms.create_topic import CreateTopic
-from flask import Blueprint, jsonify, session, request
+from flask import Blueprint, jsonify, session, request, redirect
 from app.models import Topic, db
 from app.forms import EditTopic, CreateTopic
 from flask_login import login_required, current_user
@@ -47,5 +47,5 @@ def delete_topic(topic_id):
     topic = Topic.query.get(topic_id)
     db.session.delete(topic) 
     db.session.commit()
-    print("DELETEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+    redirect('/')
     return topic.to_dict()

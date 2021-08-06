@@ -1,12 +1,15 @@
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { Modal } from "../../context/Modal";
 import { deleteTopic } from "../../store/categories";
 const DeleteTopicModal = ({handleOffClick, topic}) => {
-  console.log("TOPIC", topic)
-  const dispatch = useDispatch
-  const topicId = topic.id
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const topicId = topic.id;
+  const categoryId = topic.category_id;
   const handleDelete = () => {
-    dispatch(deleteTopic({topicId}, handleOffClick))
+    dispatch(deleteTopic(topicId, categoryId, handleOffClick))
+    history.push('/')
   };
   return (
     <>

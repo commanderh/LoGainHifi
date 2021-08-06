@@ -12,7 +12,7 @@ const load = (categories) => ({
 const create = (topic, category_id) => ({
   type: CREATE_TOPIC,
   topic,
-  category_id 
+  category_id
 })
 
 const edit = (topic, category_id) => ({
@@ -21,16 +21,16 @@ const edit = (topic, category_id) => ({
   category_id
 })
 
-const remove = (topic, category_id) => ({
+const remove = (topic_id, category_id) => ({
   type: DELETE_TOPIC,
-  topic,
+  topic_id,
   category_id
 })
 
 export const loadCategories = () => async (dispatch) => {
   const response = await fetch(`/api/categories/`);
 
-  if(response.ok) {
+  if (response.ok) {
     const data = await response.json();
     dispatch(load(data));
   }
@@ -39,10 +39,10 @@ export const loadCategories = () => async (dispatch) => {
 export const createTopic = (topicFormValues, handleOffClick) => async (dispatch) => {
   const response = await fetch(`/api/topics/`, {
     method: "POST",
-    headers: {"Content-Type": "application/json"},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(topicFormValues)
   })
-  if(response.ok) {
+  if (response.ok) {
     const data = await response.json();
     // console.log(">>>>>>>>><<<<<<<<", data)
     dispatch(create(data, topicFormValues.category_id))
@@ -53,10 +53,10 @@ export const createTopic = (topicFormValues, handleOffClick) => async (dispatch)
 export const editTopic = (topicFormValues, handleOffClick) => async (dispatch) => {
   const response = await fetch(`/api/topics/${topicFormValues.topic_id}`, {
     method: "PUT",
-    headers: {"Content-Type": "application/json"},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(topicFormValues)
   })
-  if(response.ok) {
+  if (response.ok) {
     const data = await response.json();
     // console.log(">>>>>>>>><<<<<<<<", data)
     dispatch(edit(data, topicFormValues.category_id))
@@ -64,13 +64,14 @@ export const editTopic = (topicFormValues, handleOffClick) => async (dispatch) =
   }
 }
 
-export const deleteTopic = (topicId) => async (dispatch) => {
+export const deleteTopic = (topicId, categoryId, handleOffClick) => async (dispatch) => {
   const response = await fetch(`/api/topics/${topicId}`, {
     method: "DELETE",
-    headers: {"Content-Type": "application/json"},
+    headers: { "Content-Type": "application/json" },
   });
-  if(response.ok) {
-    
+  if (response.ok) {
+    dispatch(remove(topicId, categoryId))
+    handleOffClick();
   }
 }
 
@@ -82,9 +83,9 @@ let initialState = {
 };
 const categoriesReducer = (state = initialState, action) => {
 
-  switch(action.type) {
+  switch (action.type) {
     case LOAD_CATEGORIES:
-      return {...state, all: action.categories, loaded:true}
+      return { ...state, all: action.categories, loaded: true }
     case CREATE_TOPIC:
       // const currentCategory = state.all[action.payload.category_id]
       // const topics = currentCategory.topics
@@ -96,11 +97,11 @@ const categoriesReducer = (state = initialState, action) => {
         ...state,
         all: {
           ...state.all,
-          [action.category_id] : {
+          [action.category_id]: {
             ...state.all[action.category_id],
             topics: {
               ...state.all[action.category_id].topics,
-              [action.topic.id] : action.topic
+              [action.topic.id]: action.topic
             }
           }
         },
@@ -111,18 +112,28 @@ const categoriesReducer = (state = initialState, action) => {
         ...state,
         all: {
           ...state.all,
-          [action.category_id] : {
+          [action.category_id]: {
             ...state.all[action.category_id],
             topics: {
               ...state.all[action.category_id].topics,
-              [action.topic.id] : action.topic
+              [action.topic.id]: action.topic
             }
           }
         },
       };
     case DELETE_TOPIC:
+      delete state.all[action.category_id].topics[action.topic_id]
       return {
-
+        ...state,
+        all: {
+          ...state.all,
+          [action.category_id]: {
+            ...state.all[action.category_id],
+            topics: {
+              ...state.all[action.category_id].topics
+            }
+          }
+        }
       }
     default:
       return state;

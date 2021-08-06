@@ -4,13 +4,13 @@ WORKDIR /react-app
 COPY react-app/. .
 
 # You have to set this because it should be set during build time.
-ENV REACT_APP_BASE_URL=<Your-REACT_APP_BASE_URL-here>
+ENV REACT_APP_BASE_URL=https://logainhifi.herokuapp.com
 
 # Build our React App
 RUN npm install
 RUN npm run build
 
-FROM python:3.9
+FROM python:THE.EXACT.PYTHON.VERSION.IN.YOUR.PIPFILE
 
 # Setup Flask environment
 ENV FLASK_APP=app
@@ -20,6 +20,7 @@ ENV SQLALCHEMY_ECHO=True
 EXPOSE 8000
 
 WORKDIR /var/www
+COPY backend/. .
 COPY . .
 COPY --from=build-stage /react-app/build/* app/static/
 
