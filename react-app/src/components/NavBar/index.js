@@ -1,10 +1,12 @@
 import { useState } from "react";
-import styles from "../../css-modules/NavBar.module.css";
-import SignupFormModal from "../SignupFormModal";
-import LoginFormModal from "../LoginFormModal";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
-import CreateTopicModal from "../CreateTopicModal"
+import { Link } from "react-router-dom";
+import CreateTopicModal from "../CreateTopicModal";
+import SignupFormModal from "../SignupFormModal";
+import LoginFormModal from "../LoginFormModal";
+import logo from "../../assets/logo.png";
+import styles from "../../css-modules/NavBar.module.css";
 
 const NavBar = () => {
   const [toggleModal, setToggleModal] = useState("");
@@ -43,11 +45,15 @@ const NavBar = () => {
       </>
     )
   }
-
+  console.log(styles)
   return (
-    <nav>
-      <div>Logo Placeholder</div>
-      <div className="right-side">
+    <nav className={styles.navbarContainer}>
+      <div className={styles.navbarLeftContainer}>
+        <Link to="/">
+          <img></img>
+        </Link>
+      </div>
+      <div className={styles.navbarRightContainer}>
         {isUserLoggedIn}
       </div>
     </nav>

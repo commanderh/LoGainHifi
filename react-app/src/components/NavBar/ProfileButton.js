@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import LogoutButton from "./LogoutButton";
+import styles from "../../css-modules/NavBar.module.css";
 
 const ProfileButton = ({ user }) => {
   const dispatch = useDispatch();

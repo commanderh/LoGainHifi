@@ -8,7 +8,7 @@ from flask_login import login_required, current_user
 comments_routes = Blueprint('comments', __name__)
 @comments_routes.route('/<int:topic_id>')
 def get_comments(topic_id):
-    comments = User_Comment.query.filter(Topic.id == topic_id).all()
+    comments = User_Comment.query.filter(User_Comment.topic_id == topic_id).all()
     # print(f'THESE ARE YOUR CATEGORIES: {categories}')
     # return {'categories': [category.to_dict() for category in categories]}
     return {comment.id: comment.to_dict() for comment in comments}

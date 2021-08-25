@@ -56,7 +56,7 @@ export const editComment = (comment) => async (dispatch) => {
   const data = await response.json();
   console.log(data)
   if (response.ok) {
-    dispatch(add(data))
+    dispatch(edit(data))
   }
 };
 
