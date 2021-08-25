@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import CreateTopicModal from "../CreateTopicModal";
 import SignupFormModal from "../SignupFormModal";
 import LoginFormModal from "../LoginFormModal";
-import logo from "../../assets/logo.png";
+// import logo from "../../assets/logo.png";
 import styles from "../../css-modules/NavBar.module.css";
 
 const NavBar = () => {
