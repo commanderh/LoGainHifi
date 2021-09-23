@@ -1,0 +1,10 @@
+.navbarContainer {
+  display: flex;
+  background-color: blue;
+}
+
+
+.navLogo {
+  max-width: 75px;
+  max-height: 75px;
+}

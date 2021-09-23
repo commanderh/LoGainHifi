@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import CreateTopicModal from "../CreateTopicModal";
 import SignupFormModal from "../SignupFormModal";
 import LoginFormModal from "../LoginFormModal";
-// import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.png";
 import styles from "../../css-modules/NavBar.module.css";
 
 const NavBar = () => {
@@ -50,7 +50,7 @@ const NavBar = () => {
     <nav className={styles.navbarContainer}>
       <div className={styles.navbarLeftContainer}>
         <Link to="/">
-          <img></img>
+          <img className={styles.navLogo} src={logo} alt=""></img>
         </Link>
       </div>
       <div className={styles.navbarRightContainer}>
