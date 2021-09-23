@@ -33,7 +33,8 @@ const NavBar = () => {
   if(!user) {
     isUserLoggedIn = (
       <>
-        <button id="signup" onClick={handleOnClickToggle}>Login | Signup</button>
+        <button id="signup" className={styles.navButtons} onClick={handleOnClickToggle}>SIGN UP</button>
+        <button id="login" className={styles.navButtons} onClick={handleOnClickToggle}>LOGIN</button>
         {(toggleModal === "signup" || toggleModal === "signup2")&& <SignupFormModal handleOnClickToggle={handleOnClickToggle} handleOffClick={handleOffClick}/>}
         {toggleModal === "login" && <LoginFormModal handleOnClickToggle={handleOnClickToggle} handleOffClick={handleOffClick}/>}
       </>
