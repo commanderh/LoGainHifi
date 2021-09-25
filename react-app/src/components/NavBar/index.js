@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import CreateTopicModal from "../CreateTopicModal";
 import SignupFormModal from "../SignupFormModal";
 import LoginFormModal from "../LoginFormModal";
 import logo from "../../assets/logo.png";
 import styles from "../../css-modules/NavBar.module.css";
+import LogoutButton from "./LogoutButton";
 
 const NavBar = () => {
   const [toggleModal, setToggleModal] = useState("");
@@ -43,6 +44,8 @@ const NavBar = () => {
     isUserLoggedIn = (
       <>
         <ProfileButton user={user}/>
+        <NavLink className={styles.userLink} to="/">{user.username}</NavLink>
+        <LogoutButton />
       </>
     )
   }

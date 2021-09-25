@@ -25,6 +25,18 @@
   height: 100%;
 }
 
+.userLink {
+	font: inherit;
+	cursor: pointer;
+  padding: 0px 16px;
+  font-size: 12px;
+  /* color: rgb(129, 142, 153); */
+  color : blue;
+  text-decoration: none;
+  height: inherit;
+  transition: .3s;
+}
+
 .navButtons {
   background: none;
 	color: inherit;
