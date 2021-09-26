@@ -34,8 +34,8 @@ const NavBar = () => {
   if(!user) {
     isUserLoggedIn = (
       <>
-        <button id="signup" className={styles.navButtons} onClick={handleOnClickToggle}>SIGN UP</button>
-        <button id="login" className={styles.navButtons} onClick={handleOnClickToggle}>LOGIN</button>
+        <button id="signup" className={styles.navButtons} onClick={handleOnClickToggle}>sign up</button>
+        <button id="login" className={styles.navButtons} onClick={handleOnClickToggle}>login</button>
         {(toggleModal === "signup" || toggleModal === "signup2")&& <SignupFormModal handleOnClickToggle={handleOnClickToggle} handleOffClick={handleOffClick}/>}
         {toggleModal === "login" && <LoginFormModal handleOnClickToggle={handleOnClickToggle} handleOffClick={handleOffClick}/>}
       </>
@@ -43,8 +43,8 @@ const NavBar = () => {
   } else {
     isUserLoggedIn = (
       <>
-        <ProfileButton user={user}/>
-        <NavLink className={styles.userLink} to="/">{user.username}</NavLink>
+        {/* <ProfileButton user={user}/> */}
+        <button className={`${styles.navButtons} ${styles.usernameButton}`} to="/">{user.username}</button>
         <LogoutButton />
       </>
     )

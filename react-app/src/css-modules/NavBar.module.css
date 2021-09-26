@@ -25,18 +25,6 @@
   height: 100%;
 }
 
-.userLink {
-	font: inherit;
-	cursor: pointer;
-  padding: 0px 16px;
-  font-size: 12px;
-  /* color: rgb(129, 142, 153); */
-  color : blue;
-  text-decoration: none;
-  height: inherit;
-  transition: .3s;
-}
-
 .navButtons {
   background: none;
 	color: inherit;
@@ -44,15 +32,26 @@
 	padding: 0;
 	font: inherit;
 	cursor: pointer;
-	outline: inherit;
   padding: 0px 16px;
   font-size: 12px;
   color: rgb(129, 142, 153);
   height: inherit;
   transition: .3s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.usernameButton {
+  border-left: 1px solid rgb(235, 237, 240);
+  border-right: 1px solid rgb(235, 237, 240);
 }
 
 .navButtons:hover {
+  border-bottom: 1px solid rgb(0,206,134);
+  color: rgb(0,206,134);
+}
+
+.userLink:hover {
   border-bottom: 1px solid rgb(0,206,134);
   color: rgb(0,206,134);
 }
